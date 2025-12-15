@@ -1,0 +1,7 @@
+Un Deployment transforma un @flow de un script local en una entidad gestionable por la API de Prefect.
+
+Función: Empaqueta el flujo con metadatos de ejecución.
+
+Responsabilidad: Define qué se ejecuta, cuándo se ejecuta (schedules/triggers) y con qué parámetros.
+
+Almacenamiento: Vive en el servidor (Prefect Cloud o Self-Hosted), desacoplando el código de tu máquina local inmediata

@@ -1,0 +1,18 @@
+Un Work Pool es la capa de abstracción entre el orquestador (el servidor de Prefect) y la infraestructura de cómputo real.
+
+Función: Actúa como una cola de mensajes tipada (Queue).
+
+Responsabilidad: Define dónde se ejecuta el código. Determina si el flujo correrá en un proceso local, un contenedor Docker, un cluster de Kubernetes o una instancia de AWS ECS.
+
+Priorización: Gestiona la concurrencia y asigna tareas a los "Workers" (agentes) disponibles que están escuchando ese pool específico.
+
+Relación Directa
+Para ejecutar un flujo en producción:
+
+Creas un Deployment que apunta a un Work Pool específico.
+
+El servidor de Prefect envía la ejecución al Work Pool.
+
+Un Worker (agente) suscrito a ese pool recoge el trabajo y levanta la infraestructura necesaria para ejecutar el código.
+
+Resumen: El Deployment es la orden de trabajo; el Work Pool es la ventanilla de asignación de recursos.

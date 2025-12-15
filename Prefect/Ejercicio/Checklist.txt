@@ -1,0 +1,9 @@
+We will preprocess the Bank Churn dataset from Kaggle, then use scikit-learn to train and evaluate the Random Forest Classifiers model.
+
+load_data: for loading and processing the CSV file using pandas
+preprocessing: preparing the data for training, filling missing values, encoding, and scaling.
+data_split: splitting the data into testing and training sets
+train_model: selecting the top features and training the model
+get_prediction: generating the prediction using a testing set
+evaluate_model: calculator the accuracy and f1 score
+save_model: saving the model weights using skops

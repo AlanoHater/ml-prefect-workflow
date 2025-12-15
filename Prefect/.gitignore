@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual envs
+.venv/
+venv/
+
+# Data
+data/
+*.csv
+
+# Models
+*.skops
+*.joblib
+*.pkl
+
+# Prefect
+.prefect/
+prefect.db
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store

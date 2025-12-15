@@ -1,0 +1,72 @@
+GUÍA DE CONFIGURACIÓN: ENTORNO DE DESARROLLO PREFECT CON DOCKER (DEVCONTAINERS)
+
+1. REQUISITOS PREVIOS
+---------------------
+- Docker Desktop instalado y ejecutándose.
+- Cursor (o VS Code) instalado.
+- Extensión "Dev Containers" (versión de Anysphere para Cursor) instalada.
+
+2. ESTRUCTURA DE ARCHIVOS
+-------------------------
+Tu proyecto debe tener esta estructura exacta para que Docker encuentre los contextos:
+
+/TuProyecto
+  ├── .devcontainer/
+  │    ├── Dockerfile
+  │    ├── devcontainer.json
+  │    └── requirements.txt  <-- IMPORTANTE: Debe estar DENTRO de .devcontainer
+  ├── main.py
+  ├── train.csv
+  └── ... otros archivos del proyecto
+
+3. CONFIGURACIÓN DE ARCHIVOS
+----------------------------
+
+A) .devcontainer/Dockerfile
+---------------------------
+FROM python:3.9-slim
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /workspace
+RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+B) .devcontainer/devcontainer.json
+----------------------------------
+{
+    "name": "Prefect ML Workflow",
+    "build": { "dockerfile": "Dockerfile" },
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python", "ms-python.vscode-pylance"]
+        }
+    },
+    "forwardPorts": [4200],
+    "remoteUser": "root"
+}
+
+C) .devcontainer/requirements.txt
+---------------------------------
+prefect
+pandas
+scikit-learn
+skops
+
+4. EJECUCIÓN DEL ENTORNO
+------------------------
+1. Abrir la carpeta raíz del proyecto (ej: "Ejercicio") en Cursor.
+2. Abrir Command Palette (Ctrl+Shift+P / Cmd+Shift+P).
+3. Ejecutar comando: "Dev Containers: Reopen in Container".
+4. Esperar a que finalice el build.
+5. Ejecutar el codigo en esta ventana
+
+5. VERIFICACIÓN
+---------------
+- La terminal debe indicar: root@...:/workspace
+- Los archivos generados por el script (ej: bank_model.skops) persistirán en tu disco local.
+- La UI de Prefect será accesible en http://localhost:4200 (si se inicia el servidor).
+
+6. SOLUCIÓN DE ERRORES COMUNES
+------------------------------
+- Error "docker buildx failed": Generalmente ocurre si `requirements.txt` está fuera de la carpeta `.devcontainer`. Moverlo dentro y reconstruir.
