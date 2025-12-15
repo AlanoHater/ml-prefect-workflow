@@ -10,6 +10,7 @@
 | **Optimization** | Class Imbalance handled via `scale_pos_weight` | |
 | **Main Metric** | F1 Score (Optimized via Threshold Moving) | |
 | **Current F1** | ~0.67 | |
+| **Current Acc** | ~0.87 | |
 
 ## 2. Pipeline Architecture and Flow
 
