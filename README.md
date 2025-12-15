@@ -6,7 +6,7 @@
 | Feature | Detail | Source |
 | :--- | :--- | :--- |
 | **Problem Type** | Binary Classification (Predicting customer exit: 0 or 1) | Kaggle |
-| **Model** | XGBoost Classifier | |
+| **Model** | XGBoost Classifier | Sklearn |
 | **Optimization** | Class Imbalance handled via `scale_pos_weight` | |
 | **Main Metric** | F1 Score (Optimized via Threshold Moving) | |
 | **Current F1** | ~0.67 | |
